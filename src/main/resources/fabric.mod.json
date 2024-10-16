@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "fluxitems",
+  "version": "${version}",
+  "name": "FluxItems",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/fluxitems/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "me.quickscythe.fluxitems.Initializer"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
