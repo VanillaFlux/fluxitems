@@ -1,8 +1,8 @@
 package me.quickscythe.fluxitems.utils;
 
-import json2.JSONObject;
-import me.quickscythe.fluxcore.utils.data.AccountManager;
-import me.quickscythe.fluxcore.utils.data.StorageManager;
+import org.json.JSONObject;
+import me.quickscythe.fluxcore.api.data.AccountManager;
+import me.quickscythe.fluxcore.api.data.StorageManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.server.network.ServerPlayerEntity;

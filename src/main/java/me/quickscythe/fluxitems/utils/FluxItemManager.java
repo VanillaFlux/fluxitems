@@ -1,8 +1,8 @@
 package me.quickscythe.fluxitems.utils;
 
-import json2.JSONObject;
+import org.json.JSONObject;
 import me.quickscythe.fluxcore.utils.CoreUtils;
-import me.quickscythe.fluxcore.utils.data.StorageManager;
+import me.quickscythe.fluxcore.api.data.StorageManager;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.core.Core;
 
@@ -22,6 +22,16 @@ public class FluxItemManager {
             CoreUtils.getLoggerUtils().log("Creating item folder: " + itemsFolder.mkdirs());
         }
         CoreUtils.getLoggerUtils().log("Loading items...");
+        load();
+    }
+
+    public static void reload(){
+        CoreUtils.getLoggerUtils().log("Reloading items...");
+        items.clear();
+        load();
+    }
+
+    private static void load() {
         for(File file : itemsFolder.listFiles()){
             if(file.getName().endsWith(".json")){
                 CoreUtils.getLoggerUtils().log("Loading item: " + file.getName());

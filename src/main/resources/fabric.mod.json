@@ -10,7 +10,7 @@
   "icon": "assets/fluxitems/icon.png",
   "environment": "server",
   "entrypoints": {
-    "main": [
+    "fluxcore": [
       "me.quickscythe.fluxitems.Initializer"
     ]
   },
