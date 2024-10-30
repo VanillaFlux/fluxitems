@@ -1,10 +1,8 @@
 package me.quickscythe.fluxitems.utils;
 
-import org.json.JSONObject;
-import me.quickscythe.fluxcore.utils.CoreUtils;
 import me.quickscythe.fluxcore.api.data.StorageManager;
-import net.minecraft.util.Identifier;
-import org.apache.logging.log4j.core.Core;
+import me.quickscythe.fluxcore.api.logger.LoggerUtils;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.Collection;
@@ -19,14 +17,14 @@ public class FluxItemManager {
     public static void init(){
         itemsFolder = new File(StorageManager.getConfigFolder(), "items");
         if(!itemsFolder.exists()){
-            CoreUtils.getLoggerUtils().log("Creating item folder: " + itemsFolder.mkdirs());
+            LoggerUtils.getLogger().info("Creating item folder: {}", itemsFolder.mkdirs());
         }
-        CoreUtils.getLoggerUtils().log("Loading items...");
+        LoggerUtils.getLogger().info("Loading items...");
         load();
     }
 
     public static void reload(){
-        CoreUtils.getLoggerUtils().log("Reloading items...");
+        LoggerUtils.getLogger().info("Reloading items...");
         items.clear();
         load();
     }
@@ -34,26 +32,27 @@ public class FluxItemManager {
     private static void load() {
         for(File file : itemsFolder.listFiles()){
             if(file.getName().endsWith(".json")){
-                CoreUtils.getLoggerUtils().log("Loading item: " + file.getName());
+                LoggerUtils.getLogger().info("Loading item: {}", file.getName());
                 JSONObject json = (JSONObject) StorageManager.getStorage().load(file);
+                json.put("id", file.getName().replace(".json", ""));
                 createItem(json);
             }
         }
     }
 
-    public static FluxItem createItem(String name, String id, int qid, JSONObject components){
-        FluxItem item = new FluxItem(name, id, qid, components);
-        items.put(name, item);
-        CoreUtils.getLoggerUtils().log("Created item: " + name + " (" + qid + ")");
+    public static FluxItem createItem(String id, String material, int qid, JSONObject components){
+        FluxItem item = new FluxItem(id, material, qid, components);
+        items.put(id, item);
+        LoggerUtils.getLogger().info("Created item: {}", id);
         return item;
     }
 
     public static FluxItem createItem(JSONObject json){
-        String name = json.getString("name");
-        String id = json.getString("base_item");
+        String id = json.getString("id");
+        String material = json.getString("base_item");
         int qid = json.getInt("qid");
         JSONObject components = json.getJSONObject("components");
-        return createItem(name, id, qid, components);
+        return createItem(id, material, qid, components);
     }
 
     public static FluxItem getItem(String name){

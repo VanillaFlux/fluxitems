@@ -1,11 +1,7 @@
 {
   "base_item": "minecaft:carved_pumpkin",
-  "qid": 1,
+  "qid": 9,
   "components": {
-    "minecraft:equitable": {
-      "model": "minecraft:diamond",
-      "slot": "head"
-    },
-    "minecraft:item_model": "vanillaflux:tef/plushies/spring_plushy"
+    "minecraft:custom_model_data": 100
   }
 }

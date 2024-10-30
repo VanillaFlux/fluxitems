@@ -34,8 +34,7 @@ public class ConvertCommand implements CommandRegistrationCallback {
                     FluxItem item = FluxItemManager.getItem(StringArgumentType.getString(context, "item"));
                     if (item.canConvert(player)) {
                         source.sendMessage(Text.literal("§6Converting item..."));
-                        String cmd = "/item modify entity " + player.getName().getString() + " weapon {function:\"minecraft:set_components\", components: " + item.getComponents() + "}";
-                        System.out.println(cmd);
+                        String cmd = "/item modify entity " + player.getName().getString() + " weapon {function:\"minecraft:set_components\", components: " + item.components() + "}";
                         source.getServer().getCommandManager().executeWithPrefix(source.getServer().getCommandSource(), cmd);
                         return Command.SINGLE_SUCCESS;
                     }
@@ -46,9 +45,11 @@ public class ConvertCommand implements CommandRegistrationCallback {
                     ServerCommandSource source = context.getSource();
                     List<String> items = new ArrayList<>();
                     ServerPlayerEntity player = source.getPlayerOrThrow();
+                    System.out.println(FluxItemManager.getItems().size());
                     for (FluxItem item : FluxItemManager.getItems()) {
+                        System.out.println(item.id());
                         if (item.canConvert(player)) {
-                            items.add(item.getName());
+                            items.add(item.id());
                         }
                     }
 
